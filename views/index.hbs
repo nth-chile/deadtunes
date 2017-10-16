@@ -1,0 +1,97 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>grateful dead app</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style/normalize.css">
+        <link rel="stylesheet" type="text/css" href="style/style.css">
+
+        <!-- Place favicon.ico in the root directory -->
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+        <header class='header'>
+            <h1><a class='back' href="../index.html">&laquo;</a></h1>
+            <h1>dead-tracks.net</h1>
+        </header>
+        <ul class='list'>
+            <li class="list__item"><a href="#/1995">1995</a></li>
+            <li class="list__item"><a href="#/1994">1994</a></li>
+            <li class="list__item"><a href="#/1993">1993</a></li>
+            <li class="list__item"><a href="#/1992">1992</a></li>
+            <li class="list__item"><a href="#/1991">1991</a></li>
+            <li class="list__item"><a href="#/1990">1990</a></li>
+            <li class="list__item"><a href="#/1989">1989</a></li>
+            <li class="list__item"><a href="#/1988">1988</a></li>
+            <li class="list__item"><a href="#/1987">1987</a></li>
+            <li class="list__item"><a href="#/1986">1986</a></li>
+            <li class="list__item"><a href="#/1985">1985</a></li>
+            <li class="list__item"><a href="#/1984">1984</a></li>
+            <li class="list__item"><a href="#/1983">1983</a></li>
+            <li class="list__item"><a href="#/1982">1982</a></li>
+            <li class="list__item"><a href="#/1981">1981</a></li>
+            <li class="list__item"><a href="#/1980">1980</a></li>
+            <li class="list__item"><a href="#/1979">1979</a></li>
+            <li class="list__item"><a href="#/1978">1978</a></li>
+            <li class="list__item"><a href="#/1977">1977</a></li>
+            <li class="list__item"><a href="#/1976">1976</a></li>
+            <li class="list__item"><a href="#/1975">1975</a></li>
+            <li class="list__item"><a href="#/1974">1974</a></li>
+            <li class="list__item"><a href="#/1973">1973</a></li>
+            <li class="list__item"><a href="#/1972">1972</a></li>
+            <li class="list__item"><a href="#/1971">1971</a></li>
+            <li class="list__item"><a href="#/1970">1970</a></li>
+            <li class="list__item"><a href="#/1969">1969</a></li>
+            <li class="list__item"><a href="#/1968">1968</a></li>
+            <li class="list__item"><a href="#/1967">1967</a></li>
+            <li class="list__item"><a href="#/1966">1966</a></li>
+            <li class="list__item"><a href="#/1965">1965</a></li>
+        </ul>
+
+        <div class='player hidden'>
+            <button class='button button__prev'>prev</button>
+            <button class='button button__play'>play</button>
+            <button class='button button__next'>next</button>
+            <div class="player__data">
+
+                <div>
+                    <span class="player__title"></span>
+                    <span class="player__date"></span>
+                    <span class="player__venue"></span>
+                </div>
+
+                <div>
+                    <span class="player__elapsed"></span><span class="player__duration"></span>
+                </div>
+
+                <div class="player__bar">
+                    <div class="player__progress"></div>
+                </div>
+
+            </div> <!-- .player__data -->
+        </div>
+
+        <audio autoplay src='#'></audio>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="scripts/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+
+        <script src='scripts/DeadEvent.js'></script>
+        <script src='scripts/DeadModel.js'></script>
+        <script src='scripts/DeadView.js'></script>
+        <script src='scripts/DeadController.js'></script>
+        <script src='scripts/dead.js'></script>
+
+        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+        <script>
+            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+        </script>
+        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    </body>
+</html>

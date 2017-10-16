@@ -1,0 +1,184 @@
+html {
+  white-space: nowrap; }
+
+body {
+  margin: 0; }
+
+header {
+  box-shadow: 2px 2px 2px #030156;
+  padding-left: 30px;
+  position: fixed;
+  top: 0;
+  height: 70px;
+  width: 100%;
+  z-index: 2; }
+  header h1 {
+    display: inline-block;
+    margin: 15px 0; }
+  header h1:nth-child(2) {
+    position: absolute;
+    left: 43%; }
+  @media all and (max-width: 375px) {
+    header header h1:nth-child(2) {
+      left: 35%; } }
+
+a {
+  text-decoration: none; }
+
+.list {
+  margin: 70px 0 75px 0;
+  padding: 0; }
+
+.list__item {
+  list-style: none;
+  border-bottom: 1px solid #030156;
+  height: 75px;
+  padding-left: 30px; }
+  .list__item a, .list__item p {
+    line-height: 75px;
+    margin: 0;
+    vertical-align: top; }
+  .list__item a {
+    cursor: default;
+    display: inline-block;
+    padding-right: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: rgba(40, 176, 251, 0.34) 0 0 22px;
+    white-space: nowrap;
+    max-width: 70%; }
+  .list__item p {
+    display: inline-block;
+    font-family: Consolas, monaco, monospace; }
+  .list__item p:last-child {
+    cursor: default;
+    color: #1abaff;
+    position: absolute;
+    right: 30px; }
+
+.player {
+  position: fixed;
+  bottom: 0;
+  height: 75px;
+  width: 100%; }
+
+.button {
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  margin-top: -28px; }
+
+.hidden {
+  display: none; }
+
+.button__prev {
+  display: none; }
+
+.button__play {
+  background: url("../img/controls.svg") -41px 1px;
+  background-size: cover;
+  margin-left: 12px; }
+
+.button__play.playing {
+  background: url("../img/controls.svg") -77px 1px;
+  background-size: cover; }
+
+.button__next {
+  background: url("../img/controls.svg") -114px 1px;
+  background-size: cover;
+  margin-left: 73px; }
+
+.player__data {
+  margin-left: 140px;
+  margin-top: -2px; }
+
+.player__duration {
+  display: block;
+  position: absolute;
+  left: 141px;
+  margin: 0; }
+
+.player__bar {
+  display: none; }
+
+.player__progress {
+  background: #16014c;
+  background: -moz-linear-gradient(top, #230176 0%, #16014c 100%);
+  background: -webkit-gradient(left top, left #16014c, color-stop(0%, #230176), color-stop(100%, #16014c));
+  background: -webkit-linear-gradient(top, #230176 0%, #16014c 100%);
+  background: -o-linear-gradient(top, #230176 0%, #16014c 100%);
+  background: -ms-linear-gradient(top, #230176 0%, #16014c 100%);
+  background: linear-gradient(to #16014c, #230176 0%, #16014c 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#230176', endColorstr='#16014c', GradientType=0 );
+  border-radius: 3px 0 0 3px;
+  height: 10px;
+  width: 0; }
+
+.player__title {
+  display: inline-block;
+  font-size: 1.5rem;
+  margin-top: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 20px); }
+
+.player__title span {
+  font-family: Consolas, monaco, monospace;
+  margin-left: 18px; }
+
+@media all and (min-width: 375px) {
+  .button__prev {
+    display: block;
+    background: url("../img/controls.svg") -2px 1px;
+    background-size: cover;
+    margin-left: 15px; }
+
+  .button__play {
+    margin-left: 75px; }
+
+  .button__next {
+    margin-left: 135px; }
+
+  .player__data {
+    margin-left: 201px; }
+
+  .player__data .player__duration {
+    left: 202px; } }
+@media all and (min-width: 425px) {
+  .player__bar {
+    display: block;
+    width: calc(100% - 15px);
+    border-radius: 3px;
+    box-shadow: 0.5px 0.5px 0.5px #2c0297;
+    cursor: pointer;
+    height: 10px;
+    background: #6be600;
+    background: -moz-linear-gradient(top, #84ff16 0%, #6be600 100%);
+    background: -webkit-gradient(left top, left #6be600, color-stop(0%, #84ff16), color-stop(100%, #6be600));
+    background: -webkit-linear-gradient(top, #84ff16 0%, #6be600 100%);
+    background: -o-linear-gradient(top, #84ff16 0%, #6be600 100%);
+    background: -ms-linear-gradient(top, #84ff16 0%, #6be600 100%);
+    background: linear-gradient(to #6be600, #84ff16 0%, #6be600 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#84ff16', endColorstr='#6be600', GradientType=0 ); }
+
+  .player__date {
+    display: inline; }
+
+  .player__duration {
+    display: none; } }
+@media all and (min-width: 625px) {
+  .player__duration {
+    display: inline-block;
+    position: absolute;
+    margin: 24px 0px 0px 0;
+    left: initial;
+    right: 55px; }
+
+  .player__title {
+    max-width: calc(100% - 150px); }
+
+  .player__bar {
+    width: calc(100% - 55px); } }
+
+/*# sourceMappingURL=style.css.map */

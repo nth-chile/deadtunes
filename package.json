@@ -1,0 +1,19 @@
+{
+  "name": "grateful-dead-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jared Salzano",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.1",
+    "handlebars": "^4.0.10",
+    "hbs": "^4.0.1",
+    "mongod": "^2.0.0",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.12.0"
+  }
+}
