@@ -1,8 +1,9 @@
 function DeadView(model, elements) {
 	this.model = model;
-	this.elements = elements
+	this.elements = elements;
 
 	//to add listeners to new list items
+	this.backBtnSelected = new Event(this);
 	this.playBtnSelected = new Event(this);
 	this.prevBtnSelected = new Event(this);
 	this.nextBtnSelected = new Event(this);
@@ -17,6 +18,9 @@ function DeadView(model, elements) {
 		this.unhidePlayer();
 		this.updatePlayer(args);
 	});
+	this.model.uriIncludesTrack.attach((sender, args) => {
+		this.trackSelectedFromHash(args);
+	});
 
 	// Attach listeners to DOM
 	this.elements.$button__play.click(() => {
@@ -28,9 +32,55 @@ function DeadView(model, elements) {
 	this.elements.$button__next.click(() => {
 		this.nextBtnSelected.notify();
 	});
-	
+	$('.button__back').click(() => {
+		this.backBtnSelected.notify();
+	});
+	this.elements.$player.find('.player__bar').on('click mousemove', this.seek.bind(this));
+	this.elements.$audio.on('ended', this.onEnded.bind(this));	
 }
 DeadView.prototype = {
+	addOnLoadedMetadataHandler: function(args) {
+		const $audio = this.elements.$audio;
+		const $player = this.elements.$player;
+
+		$audio.on('loadedmetadata', onLoadedMetadataHandler);
+		this.addOnTimeupdateHandler(args);
+
+		function onLoadedMetadataHandler(e) {
+			const year = args.date.year;
+			const month = args.date.month.toString().length == 1 ? '0'.concat(args.date.month) : args.date.month;
+			const day = args.date.day.toString().length == 1 ? '0'.concat(args.date.day) : args.date.day;
+
+			var m = Math.floor(e.target.duration / 60);
+			var s = Math.floor(e.target.duration % 60);
+				m.toString();
+				s = (s < 10) ? '0'.toString().concat(s) : s;
+		
+			$player.find('.player__date').html(`${month}-${day}-${year} &mdash; `);
+			$player.find('.player__duration').html(`${m}:${s}`);
+			$player.find('.player__title').html(args.trackData.title);
+			$player.find('.player__venue').html(args.venue);
+		}
+	},
+	addOnTimeupdateHandler: function(args) {
+		const $audio = this.elements.$audio;
+		const $player = this.elements.$player;
+
+		$audio.on('timeupdate', onTimeupdateHandler);
+
+		function onTimeupdateHandler(e) {
+			const elapsed = e.target.currentTime;
+			var m = Math.floor(e.target.currentTime / 60);
+			var s = Math.floor(e.target.currentTime % 60);
+			m.toString();
+			s = (s < 10) ? '0'.toString().concat(s) : s;
+
+			this.progressWidth = Math.round(e.target.currentTime * $('.player__bar').width() / e.target.duration) + 'px';
+
+			$player.find('.player__elapsed').html(`${m}:${s}`);
+			$player.find('.player__progress').width(this.progressWidth);
+		}
+	},
 	assignTrackSelectListeners: function() {
 		$('.list__item--track').click((e) => {
 			if (e.target.tagName == 'A') {				
@@ -38,6 +88,7 @@ DeadView.prototype = {
 				this.trackSelected.notify(trackIndex);
 			}
 			else if (e.target.tagName == 'LI') {
+				console.log('itsand li');
 				const trackIndex = this.getElementIndex(e.target);
 				this.trackSelected.notify(trackIndex);
 			}
@@ -53,8 +104,31 @@ DeadView.prototype = {
 	    }
 	    return index;
 	},
+	onEnded: function(e) {
+		this.nextBtnSelected.notify();
+	},
+	seek: function(e) {
+		if (e.which != 0) {
+			const player__bar = document.querySelector('.player__bar');
+			const boundingRect = player__bar.getBoundingClientRect();			
+			this.elements.$audio[0].currentTime = Math.round((e.clientX - boundingRect.left) * this.elements.$audio[0].duration / this.elements.$player.find('.player__bar').width());
+		}
+	},
+	trackSelectedFromHash: function(hash) {
+		this.elements.$list.find('.list__item__link').each((index, item) => {
+			if (hash == item.href.slice(35)) {
+				this.trackSelected.notify(index);
+			}
+		});
+	},
+	updateTime: function(e) {
+		var bar = document.querySelector('.player__bar');
+		var rect = bar.getBoundingClientRect();
+		this.elements.$audio.currentTime = Math.round((e.clientX - rect.left) * audio.duration / $('.player__bar').width());
+	},
 	unhidePlayer: function() {
 		this.elements.$player.removeClass('hidden');
+		this.elements.$list.removeClass('no-margin');
 	},
 	updateList: function(data) {
 		if (data.type == 'years' || data.type == 'shows') {
@@ -64,6 +138,7 @@ DeadView.prototype = {
 				let $li = $('<li></li>');
 				let $a = $('<a></a>');
 				$li.addClass('list__item');
+				$a.addClass('list__item__link');
 				$a.attr('href', date.href);
 				$a.html(date.text);
 
@@ -81,9 +156,13 @@ DeadView.prototype = {
 			data.results[0].forEach((track) => {
 				let $li = $('<li></li>');
 				let $a = $('<a></a>');
+				let $span = $('<span></span>');
 				$li.addClass('list__item list__item--track');
+				$a.addClass('list__item__link');
 				$a.attr('href', track.href);
 				$a.html(track.title);
+				$span.html(track.duration);
+				$span.addClass('list__item__duration');
 				$.extend($a[0], {
 					trackData: {
 						data_src: track.data_src,
@@ -93,7 +172,9 @@ DeadView.prototype = {
 					}
 				});
 
+
 				$li.append($a);
+				$li.append($span);
 				this.elements.$list.append($li);
 			});
 		}
@@ -101,35 +182,9 @@ DeadView.prototype = {
 	updatePlayer: function(args) {
 		const $audio = this.elements.$audio;
 		const $player = this.elements.$player;
+
 		$audio.attr('src', args.trackData.data_src);
-
-		$audio.on('loadedmetadata', onLoadedMetadataHandler);
-
-		function onLoadedMetadataHandler(e) {
-			const year = args.date.year;
-			const month = args.date.month.toString().length == 1 ? '0'.concat(args.date.month) : args.date.month;
-			const day = args.date.day.toString().length == 1 ? '0'.concat(args.date.day) : args.date.day;
-
-			var m = Math.floor(e.target.duration / 60);
-			var s = Math.floor(e.target.duration % 60);
-				m.toString();
-				s = (s < 10) ? '0'.toString().concat(s) : s;
-
-			$player.find('.player__date').html(`${month}-${day}-${year}`);
-			$player.find('.player__duration').html(`${m}:${s}`);
-			$player.find('.player__title').html(args.trackData.title);
-			$player.find('.player__venue').html(args.venue);
-			$audio.on('timeupdate', onTimeupdateHandler);
-		}
-		function onTimeupdateHandler(e) {
-			const elapsed = e.target.currentTime;
-			var m = Math.floor(e.target.currentTime / 60);
-			var s = Math.floor(e.target.currentTime % 60);
-			m.toString();
-			s = (s < 10) ? '0'.toString().concat(s) : s;
-
-			$player.find('.player__elapsed').html(`${m}:${s}`);
-		}
-	}
+		this.addOnLoadedMetadataHandler(args);
+	},
 	
 };

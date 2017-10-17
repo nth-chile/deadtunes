@@ -5,6 +5,10 @@ function DeadController(model, view) {
 	this.playBtn = this.view.elements.$button__play;
 
 	// Attach view handlers
+	this.view.backBtnSelected.attach((sender, args) => {
+		this.back();
+		this.model.selectListItem();
+	});
 	this.view.playBtnSelected.attach((sender, args) => {
 		if (!this.playBtn.hasClass('playing')) this.play();
 		else this.pause();
@@ -33,6 +37,17 @@ DeadController.prototype = {
 		this.model.updateCurrentTrack(index);
 		this.play();
 	},
+	back: function() {
+		const hash = window.location.hash.substr(1);
+		if (hash.match(/\/\d{4}-\d{2}-\d{2}\/.+/)) {
+			var newHash = hash.match(/\/\d{4}-\d{2}-\d{2}(\/.*)/)[1];
+			window.history.pushState({}, '', '#' + hash.slice(0, 11));
+		}
+		else if (hash.match(/^\/[\d]{4}-[\d]{2}-[\d]{2}$/))
+			window.history.pushState({}, '', '#' + hash.slice(0, 5));
+		else if (hash.match(/^\/[\d]{4}$/))
+			window.history.pushState({}, '', hash.slice(0, 1));
+	},
 	next: function() {
 		this.model.selectNext();
 	},
@@ -46,5 +61,5 @@ DeadController.prototype = {
 	},
 	prev: function() {
 		this.model.selectPrev();
-	},
+	}
 };
