@@ -127,7 +127,7 @@ a {
   background-size: cover;
   display: none;
   @media all and (min-width: 425px) {
-    display: initial;
+    display: inline-block;
   }
 }
 .button__play {
@@ -145,7 +145,7 @@ a {
 .player__duration {
   display: none;
   @media all and (min-width: 425px) {
-    display: initial;
+    display: inline;
   }
 }
 .player__bar {
@@ -176,7 +176,10 @@ a {
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: calc(100% - 115px);
+  width: 100%;
+  @media all and (min-width: 425px) {
+    width: calc(100% - 115px);
+  }
 }
 .player__data__time {
   display: none;
@@ -192,7 +195,7 @@ a {
   position: relative;
   top: -4px;
   @media all and (min-width: 425px) {
-    display: initial;
+    display: inline;
   }
 }
 .player__venue {
@@ -200,7 +203,7 @@ a {
   position: relative;
   top: -4px;
   @media all and (min-width: 425px) {
-    display: initial;
+    display: inline;
   }
 }
 .player__title {
@@ -211,58 +214,10 @@ a {
   text-overflow: ellipsis;
   width: 100%;
   @media all and (min-width: 425px) {
-    //max-width: 50%;
-    width: initial
+    width: auto;
   }
 }
 .player__title span {
   font-family: Consolas, monaco, monospace;
   margin-left: 18px;
 }
-// @media all and (min-width: 375px) {
-//   .button__prev {
-//     display: inline-block;
-//     background: url("../img/controls.svg") -2px 1px;
-//     background-size: cover;
-//     //margin-left: 15px;
-//   }
-//   .button__play {
-//     //margin-left: 75px;
-//   }
-//   .button__next {
-//     //margin-left: 135px;
-//   }
-//   .player__duration {
-//     left: 202px;
-//   }
-// }
-// @media all and (min-width: 425px) {
-//   .player__bar {
-//     display: block;
-//     width: calc(100% - 15px);
-//     border-radius: 3px;
-//     cursor: pointer;
-//     height: 10px;
-//     background: blue;
-//   }
-//   // .player__date {
-//   //   display: inline;
-//   // }
-//   .player__duration {
-//     display: none;
-//   }
-// }
-// @media all and (min-width: 625px) {
-//   .player__duration {
-//     display: inline-block;
-//     position: absolute;
-//     left: initial;
-//     right: 7px;
-//   }
-//   .player__title {
-//     max-width: calc(100% - 150px);
-//   }
-//   .player__bar {
-//     width: 100%
-//   }
-// }

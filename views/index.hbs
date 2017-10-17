@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="style/normalize.css">
-        <link rel="stylesheet" type="text/css" href="style/style.css">
+        <link rel="stylesheet" type="text/css" href="style/autoprefixed/style.css">
         <link href="https://fonts.googleapis.com/css?family=Inconsolata:700|Open+Sans" rel="stylesheet">
 
         <!-- Place favicon.ico in the root directory -->
@@ -50,17 +50,22 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="scripts/vendor/jquery-3.2.1.min.js"><\/script>')</script>
 
-        <script src='scripts/DeadEvent.js'></script>
-        <script src='scripts/DeadModel.js'></script>
-        <script src='scripts/DeadView.js'></script>
-        <script src='scripts/DeadController.js'></script>
-        <script src='scripts/dead.js'></script>
+        <script src='scripts/babeled/polyfill.min.js'></script>
+        <script src='scripts/babeled/DeadEvent.js'></script>
+        <script src='scripts/babeled/DeadModel.js'></script>
+        <script src='scripts/babeled/DeadView.js'></script>
+        <script src='scripts/babeled/DeadController.js'></script>
+        <script src='scripts/babeled/dead.js'></script>
 
-        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105812256-2"></script>
         <script>
-            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-105812256-2');
         </script>
-        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
     </body>
 </html>

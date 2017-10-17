@@ -59,8 +59,7 @@ a {
   cursor: pointer;
   display: inline-block;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
   white-space: nowrap;
   width: calc(100% - 51px); }
   .list__item__link:hover, .list__item__link:focus {
@@ -84,9 +83,7 @@ a {
   position: relative; }
   .button:not(.button__back) {
     cursor: default;
-    -webkit-transform: translateY(6px);
-        -ms-transform: translateY(6px);
-            transform: translateY(6px);
+    transform: translateY(6px);
     height: 54px;
     width: 40px;
     margin: 4px; }
@@ -116,7 +113,7 @@ a {
   display: none; }
   @media all and (min-width: 425px) {
     .button__prev {
-      display: initial; } }
+      display: inline-block; } }
 
 .button__play {
   background: url("../img/controls.svg") -127px 0px;
@@ -134,7 +131,7 @@ a {
   display: none; }
   @media all and (min-width: 425px) {
     .player__duration {
-      display: initial; } }
+      display: inline; } }
 
 .player__bar {
   background-color: #253e5f;
@@ -163,9 +160,11 @@ a {
 .player__data__setting {
   display: inline-block;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
-  width: calc(100% - 115px); }
+  text-overflow: ellipsis;
+  width: 100%; }
+  @media all and (min-width: 425px) {
+    .player__data__setting {
+      width: calc(100% - 115px); } }
 
 .player__data__time {
   display: none;
@@ -182,7 +181,7 @@ a {
   top: -4px; }
   @media all and (min-width: 425px) {
     .player__date {
-      display: initial; } }
+      display: inline; } }
 
 .player__venue {
   display: none;
@@ -190,20 +189,21 @@ a {
   top: -4px; }
   @media all and (min-width: 425px) {
     .player__venue {
-      display: initial; } }
+      display: inline; } }
 
 .player__title {
   display: inline-block;
   font-size: 1.5rem;
   margin-top: 15px;
   overflow: hidden;
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
   width: 100%; }
   @media all and (min-width: 425px) {
     .player__title {
-      width: initial; } }
+      width: auto; } }
 
 .player__title span {
   font-family: Consolas, monaco, monospace;
   margin-left: 18px; }
+
+/*# sourceMappingURL=style.css.map */

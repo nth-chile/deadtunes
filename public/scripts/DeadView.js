@@ -35,7 +35,7 @@ function DeadView(model, elements) {
 	$('.button__back').click(() => {
 		this.backBtnSelected.notify();
 	});
-	this.elements.$player.find('.player__bar').on('click mousemove', this.seek.bind(this));
+	this.elements.$player.find('.player__bar').on('mousedown', this.seek.bind(this));
 	this.elements.$audio.on('ended', this.onEnded.bind(this));	
 }
 DeadView.prototype = {
@@ -107,13 +107,20 @@ DeadView.prototype = {
 	onEnded: function(e) {
 		this.nextBtnSelected.notify();
 	},
-	seek: function(e) {
-		if (e.which != 0) {
-			const player__bar = document.querySelector('.player__bar');
-			const boundingRect = player__bar.getBoundingClientRect();			
-			this.elements.$audio[0].currentTime = Math.round((e.clientX - boundingRect.left) * this.elements.$audio[0].duration / this.elements.$player.find('.player__bar').width());
-		}
-	},
+    seek: function seek(e) {
+            var _this5 = this;
+
+            e.preventDefault();
+            this.updateTime(e);
+            if (e.buttons == 1) {
+                    this.elements.$player.find('.player__bar').on('mousemove', function (e) {
+                            _this5.updateTime(e);
+                            $(window).on('mouseup', function (e) {
+                                    _this5.elements.$player.find('.player__bar').off('mousemove');
+                            });
+                    });
+            }
+    },
 	trackSelectedFromHash: function(hash) {
 		this.elements.$list.find('.list__item__link').each((index, item) => {
 			if (hash == item.href.slice(35)) {
@@ -121,11 +128,11 @@ DeadView.prototype = {
 			}
 		});
 	},
-	updateTime: function(e) {
-		var bar = document.querySelector('.player__bar');
-		var rect = bar.getBoundingClientRect();
-		this.elements.$audio.currentTime = Math.round((e.clientX - rect.left) * audio.duration / $('.player__bar').width());
-	},
+    updateTime: function updateTime(e) {
+            var player__bar = document.querySelector('.player__bar');
+            var boundingRect = player__bar.getBoundingClientRect();
+            this.elements.$audio[0].currentTime = Math.round((e.clientX - boundingRect.left) * this.elements.$audio[0].duration / this.elements.$player.find('.player__bar').width());
+    },
 	unhidePlayer: function() {
 		this.elements.$player.removeClass('hidden');
 		this.elements.$list.removeClass('no-margin');
