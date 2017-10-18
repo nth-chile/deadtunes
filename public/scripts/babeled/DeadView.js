@@ -126,7 +126,7 @@ DeadView.prototype = {
                 var _this3 = this;
 
                 this.elements.$list.find('.list__item__link').each(function (index, item) {
-                        if (hash == item.href.slice(35)) {
+                        if (hash == item.href.match(/\/#\/\d{4}-\d{2}-\d{2}\/(.*)/)[1]) {
                                 _this3.trackSelected.notify(index);
                         }
                 });

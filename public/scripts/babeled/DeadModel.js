@@ -42,7 +42,6 @@ DeadModel.prototype = {
         },
         getListData: function getListData(hash) {
                 var _this = this;
-
                 return $.get(hash).then(function (res) {
                         return _this.data = res;
                 });
@@ -65,6 +64,7 @@ DeadModel.prototype = {
                                                         return this.getListData(hash);
 
                                                 case 4:
+console.log(this.data, hash);
                                                         this.listItemSelected.notify(this.data);
                                                         _context.next = 12;
                                                         break;
@@ -74,7 +74,6 @@ DeadModel.prototype = {
                                                                 _context.next = 12;
                                                                 break;
                                                         }
-
                                                         _context.next = 10;
                                                         return this.getListData(hash.slice(0, 14));
 
