@@ -64,7 +64,6 @@ DeadModel.prototype = {
                                                         return this.getListData(hash);
 
                                                 case 4:
-console.log(this.data, hash);
                                                         this.listItemSelected.notify(this.data);
                                                         _context.next = 12;
                                                         break;
