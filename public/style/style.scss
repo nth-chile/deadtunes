@@ -118,7 +118,7 @@ a {
   color: $blue;
   cursor: pointer;
   height: 1em;
-  &:hover, &:focus {
+  &:hover {
     border-bottom: 2px solid $blue;
   }
 }

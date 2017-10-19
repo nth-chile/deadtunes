@@ -104,7 +104,7 @@ a {
   color: #253e5f;
   cursor: pointer;
   height: 1em; }
-  .button__back:hover, .button__back:focus {
+  .button__back:hover {
     border-bottom: 2px solid #253e5f; }
 
 .button__prev {
