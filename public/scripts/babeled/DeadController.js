@@ -11,6 +11,7 @@ function DeadController(model, view) {
         // Attach view handlers
         this.view.backBtnSelected.attach(function (sender, args) {
                 _this.back();
+                _this.model.trackList = null;
                 _this.model.selectListItem();
         });
         this.view.playBtnSelected.attach(function (sender, args) {
